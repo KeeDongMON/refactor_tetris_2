@@ -85,12 +85,14 @@ int main(void) {
 
     //init_block(&first_block, first_block.shape, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
     init_block(&first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD); //5, 0
-    init_block(&second_block, 15 , BLOCK_START_POS_Y_ON_BOARD);
-    draw_next(&console, &second_block);
     //insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
 
     key_init();
     uint16_t key_code = 0;
+
+    //delay_ms(10);
+    init_block(&second_block, 15, BLOCK_START_POS_Y_ON_BOARD);
+    draw_next(&console, &second_block);
 
     while (!game_over) {
         timer_polling();

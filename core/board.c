@@ -358,12 +358,12 @@ void draw_next(windows_console_t* console, block_t* block) {
         for (int nextJ = 0; nextJ < 4; nextJ++) {
             if (block->data[0][nextI][nextJ]) {
                 console_set_fore_color(console, my_cell.color);
-                draw_cell(&my_cell, 35 + nextI, 4 + nextJ);
+                draw_cell(&my_cell, 35 + nextJ, 4 + nextI);
                 console_set_default_color(console);
             }
             else { 
                 console_set_fore_color(console, WHITE);
-                draw_cell(&my_cell, 35 + nextI, 4 + nextJ);
+                draw_cell(&my_cell, 35 + nextJ, 4 + nextI);
                 console_set_default_color(console);
             }
         }
