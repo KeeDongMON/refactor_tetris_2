@@ -1,6 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 
-#include "core/common.h" // 공통적으로 사용되는 C 표준 헤더 파일(stdio.h, stdint.h 등)을 불러오자. OS 독립적이다.
+//#include "core/common.h" // 공통적으로 사용되는 C 표준 헤더 파일(stdio.h, stdint.h 등)을 불러오자. OS 독립적이다.
+//main.h에서 이미 있다.
 
 #include "config.h"  // 설정 파일은 최 상단에서 불러와야 한다. MCU인지 PC인지를 알아내야 하기 때문에
 #include <conio.h> // Windows라면 이 헤더파일을 불러온다.
@@ -41,12 +42,14 @@ int main(void) {
     //printf("Game Started...\r\n");
 
     // 사운드 초기화 및 플레이
-    const char* file_path = "rsc/sounds/sample1.wav";
-    play_sound(file_path);
-    //stop_sound(); // 개발할때는 정신없으니 음악을 꺼놓자.
+    const char* file_path1 = "rsc/sounds/sample1.wav";
+    play_sound(file_path1);
+    if (!BGM_N_SOUND) {
+        stop_sound(); // 개발할때는 정신없으니 음악을 꺼놓자.
+    }
 
     // 미구현
-    // show_game_demo(&console); // 데모를 보여주면서 동전 입력을 기다리자.
+    //show_game_demo(&console); // 데모를 보여주면서 동전 입력을 기다리자.
 
     // 디스플레이(=윈도우 콘솔창) 초기화
     windows_console_t console;
@@ -59,7 +62,7 @@ int main(void) {
     // 디버그용: 함수가 잘 동작하나 테스트 용
     //clear_line_on_board(gboard);
     // 미구현 혹은 덜 구현된 함수 모음
-    // draw_next_block(next_block); // 다음 블럭을 보여주기
+    //draw_next_block(next_block); // 다음 블럭을 보여주기
     //draw_box(25, 20, 20, 6, "Hello, World !!");
 
     // 디버깅용 테스트용 블럭 설정
@@ -76,8 +79,10 @@ int main(void) {
     //print_block_info(&test_block, true);
     //insert_block_to_board(gboard, &random_block, BLOCK_TEST_POS_X, BLOCK_TEST_POS_Y); // aaa insert 함수안에 update가 있다. 제거하자. bbb 제거했다.
 
-    block_t first_block;
+    block_t first_block, second_block;
     create_random_block(&first_block);
+    create_random_block(&second_block);
+
     init_block(&first_block, first_block.shape, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
     insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
 
@@ -101,25 +106,25 @@ int main(void) {
             // 디버그용
             // 키입력은 원래 board에서 받는데, 아래 f(=fixed), c(=create), r(=rotate)는 디버깅 용도이므로 여기에서 코딩했다.
             switch (key_code) {
-            //case KEY_F:
-            //case KEY_f:// 디버그 용도: 블럭을 현재 위치에서 고정시킨다.
-            //    if (first_block.fixed == false) { // 고정되었나? false == 아니오
-            //        first_block.fixed = true; // 플래그를 "고정됨"으로 바꾼다.
-            //        fix_block(&first_block);  // 블럭을 고정시킨다.
+                //case KEY_F:
+                //case KEY_f:// 디버그 용도: 블럭을 현재 위치에서 고정시킨다.
+                //    if (first_block.fixed == false) { // 고정되었나? false == 아니오
+                //        first_block.fixed = true; // 플래그를 "고정됨"으로 바꾼다.
+                //        fix_block(&first_block);  // 블럭을 고정시킨다.
 
-            //    }
-            //    else { // 고정되었나? 예
-            //        first_block.fixed = false; // 플래그를 "고정되지 않음"으로 바꾼다.
-            //        unfix_block(&first_block); // 블럭 고정을 해제한다.
-            //    }
-            //    break;
+                //    }
+                //    else { // 고정되었나? 예
+                //        first_block.fixed = false; // 플래그를 "고정되지 않음"으로 바꾼다.
+                //        unfix_block(&first_block); // 블럭 고정을 해제한다.
+                //    }
+                //    break;
 
-            //case KEY_C:
-            //case KEY_c: // 디버그 용도: 랜덤으로 블럭을 하나 만든다!
-            //    update_board_with_line_clear(&console, gboard);
-            //    create_random_block(&first_block); // 7 개중에서 1개의 랜덤 블럭을 만든다.
-            //    insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD); // aaa insert 함수안에 update가 있다. 제거하자. bbb 제거했다.
-            //    break;
+                //case KEY_C:
+                //case KEY_c: // 디버그 용도: 랜덤으로 블럭을 하나 만든다!
+                //    update_board_with_line_clear(&console, gboard);
+                //    create_random_block(&first_block); // 7 개중에서 1개의 랜덤 블럭을 만든다.
+                //    insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD); // aaa insert 함수안에 update가 있다. 제거하자. bbb 제거했다.
+                //    break;
 
             case KEY_R:
             case KEY_r: // 블럭 회전
@@ -157,7 +162,8 @@ int main(void) {
             insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
         }
     }
-
+    const char* file_path2 = "rsc/sounds/sample2.wav";
+    play_sound(file_path2);
     printf("게임 오버!!!");
     return 0;
 }

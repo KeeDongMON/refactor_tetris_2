@@ -11,7 +11,7 @@
 #define DEFAULT_DROP_SPEED (1000) //(ms 단위)
 
 //Sound On/ Off BGM 및 Sond Effect  몽땅
-#define BGM_N_SOUND OFF
+#define BGM_N_SOUND false
 
 // Shadow block 보이기 감추기
 #endif

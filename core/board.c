@@ -473,8 +473,9 @@ void move_block_by_key_input(windows_console_t* console, cell_t board[BOARD_HEIG
             //copied_block.y -= 1; // 키를 위로 이동할때는 이렇게 단순하게 적으면 안되고, 상단을 체크해 줘야 한다.
             // 왜냐면 맨위 라인은 블럭의 충돌을 감지할 어떤 블럭 (예를 들면 W)가 없기 때문이다.
             // 따라서 0 이하로 움직이지 못하게 제한해야 한다.
-            if (copied_block.y > 0) { copied_block.y -= 1; }
+            //if (copied_block.y > 0) { copied_block.y -= 1; }
             //printf("up  (x,y)=(%d,%d)", copied_block.x, copied_block.y);
+            (copied_block.rotation_dir == 3) ? copied_block.rotation_dir = 0 : copied_block.rotation_dir++;
             break;
 
         case KEY_DOWN: // 복사한 블럭을 아래로 한칸씩 이동
@@ -498,7 +499,12 @@ void move_block_by_key_input(windows_console_t* console, cell_t board[BOARD_HEIG
             break;
 
         case KEY_SPACE: // 블럭을 떨어뜨리기 block hard drop
-            // 미구현
+            while (!check_block_collision_on_board(board, &copied_block))
+                copied_block.y += 1;
+            copied_block.y -= 1;
+            break;
+        case KEY_ESC:
+            game_over = true;
             break;
     }
 
