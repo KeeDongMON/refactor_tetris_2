@@ -90,7 +90,7 @@ int main(void) {
 	delay_ms(3000); // 3초 대기
     init_block(&second_block, 15, BLOCK_START_POS_Y_ON_BOARD);
     draw_nextBox(&console);
-    draw_next(&console, &second_block);
+    draw_next(&console, &second_block); 
     //insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
 
     key_init();

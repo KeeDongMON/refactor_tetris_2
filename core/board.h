@@ -73,6 +73,7 @@ void lock_block_after_delay(cell_t board[BOARD_HEIGHT][BOARD_WIDTH], block_t* bl
 void insert_cell_to_board(cell_t board[BOARD_HEIGHT][BOARD_WIDTH], cell_t* cell, int cell_x, int cell_y);
 
 void draw_next(windows_console_t* console, block_t* block);
+void draw_nextBox(windows_console_t* console);
 
 extern bool block_collision;
 #endif
