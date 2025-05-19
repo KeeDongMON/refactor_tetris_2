@@ -70,5 +70,7 @@ void lock_block_after_delay(cell_t board[BOARD_HEIGHT][BOARD_WIDTH], block_t* bl
 // 디버그용: 셀을 삽입하는 함수
 void insert_cell_to_board(cell_t board[BOARD_HEIGHT][BOARD_WIDTH], cell_t* cell, int cell_x, int cell_y);
 
+void draw_next(windows_console_t* console, block_t* block);
+
 extern bool block_collision;
 #endif

@@ -80,11 +80,14 @@ int main(void) {
     //insert_block_to_board(gboard, &random_block, BLOCK_TEST_POS_X, BLOCK_TEST_POS_Y); // aaa insert 함수안에 update가 있다. 제거하자. bbb 제거했다.
 
     block_t first_block, second_block;
-    create_random_block(&first_block);
-    create_random_block(&second_block);
+    //create_random_block(&first_block); 굳이 shape만 랜덤으로 결정하는 함수 사용할 필요없는것 같음.
+    //create_random_block(&second_block);
 
-    init_block(&first_block, first_block.shape, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
-    insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
+    //init_block(&first_block, first_block.shape, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
+    init_block(&first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD); //5, 0
+    init_block(&second_block, 15 , BLOCK_START_POS_Y_ON_BOARD);
+    draw_next(&console, &second_block);
+    //insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
 
     key_init();
     uint16_t key_code = 0;
@@ -158,12 +161,25 @@ int main(void) {
             block_collision = false;
             lock_block_after_delay(gboard, &first_block);
             update_board_with_line_clear(&console, gboard);
-            create_random_block(&first_block); // 7 개중에서 1개의 랜덤 블럭을 만든다.
+            //create_random_block(&first_block); // 7  개중에서 1개의 랜덤 블럭을 만든다.
+            //second_to_first();
+            first_block = second_block;
             insert_block_to_board(gboard, &first_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
-        }
+            init_block(&second_block, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
+            draw_next(&console, &second_block);
+        }   
     }
     const char* file_path2 = "rsc/sounds/sample2.wav";
     play_sound(file_path2);
     printf("게임 오버!!!");
     return 0;
 }
+
+
+//void second_to_first(block_t* first, block_t* second) {
+//    //(block_t* block, block_shapes_t shape, int x, int y)
+//    first->shape = second->shape;
+//
+//    memcpy(block->data, data_i, sizeof(data_i));
+//    first->color = second->color;
+//}

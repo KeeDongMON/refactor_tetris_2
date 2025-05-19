@@ -341,6 +341,44 @@ void update_board_with_line_clear(windows_console_t* console, cell_t board[BOARD
     update_board(console, board); 
 }
 
+void draw_next(windows_console_t* console, block_t* block) {
+    //cell_t board[4][4];
+
+    //typedef struct _cell_t {
+    //    point_t point; // cell의 위치
+    //    color_t color; // cell의 색상
+    //    cell_att_t att; // cell의 속성
+    //    bool fixed;
+    //} cell_t;
+    cell_t my_cell;
+    init_cell(&my_cell, 0, 0, block->shape, block->color); // 좌표계 점검용 테스트 코드
+    
+    
+    for (int nextI = 0; nextI < 4; nextI++) {
+        for (int nextJ = 0; nextJ < 4; nextJ++) {
+            if (block->data[0][nextI][nextJ]) {
+                console_set_fore_color(console, my_cell.color);
+                draw_cell(&my_cell, 35 + nextI, 4 + nextJ);
+                console_set_default_color(console);
+            }
+            else { 
+                console_set_fore_color(console, WHITE);
+                draw_cell(&my_cell, 35 + nextI, 4 + nextJ);
+                console_set_default_color(console);
+            }
+        }
+    }
+    //console->fore_color(my_cell.color);
+    
+    //draw_cell(&my_cell, 40, 0); // 좌상단
+    //draw_cell(&my_cell, RESIZE_COLS / 2 - 1, 0); // 우상단 44,0
+    //draw_cell(&my_cell, RESIZE_COLS / 2 - 1, RESIZE_ROWS - 1); // 우하단
+    //draw_cell(&my_cell, 0, RESIZE_ROWS - 1); // 좌하단
+    //draw_cell(&my_cell, (RESIZE_COLS / 2 - 1) / 2, (RESIZE_ROWS - 1) / 2); // 정중앙
+
+    //console_set_default_color(console);
+
+}
 
 
 // 현재 상태의 데이터로 보드를 그린다. 데이터를 삭제하지 않는다.

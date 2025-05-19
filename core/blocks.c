@@ -297,10 +297,18 @@ const uint8_t data_z[BLOCK_ROTATION_DIR][BLOCK_WIDTH][BLOCK_HEIGHT] = {
 };
 
 // 블록 초기화 함수
-void init_block(block_t* block, block_shapes_t shape, int x, int y) {
-    block->shape = shape;
+void init_block(block_t* block, int x, int y) {
+	//(block_t* block, block_shapes_t shape, int x, int y)
 
-    switch (shape) {
+	int random_block_shape = 0;
+	srand((unsigned int)time(NULL));
+
+	random_block_shape = (rand() % TETRIS_BLOCK_COUNT); // 0~6까지 발생
+	random_block_shape += 2;
+
+    block->shape = random_block_shape;
+
+    switch (random_block_shape) {
 		case SHAPE_I:
 			memcpy(block->data, data_i, sizeof(data_i));
 			block->color = SHAPE_I_COLOR;
@@ -502,19 +510,19 @@ void unfix_block(block_t* block) { // 블럭 고정을 해제한다.
 	block->fixed = false;
 }
 
-void create_random_block(block_t* block) { // 7 개중에서 1개의 랜덤 블럭을 만든다.
-	int random_block_shpape= 0;
-	srand((unsigned int)time(NULL));
-
-	random_block_shpape = (rand() % TETRIS_BLOCK_COUNT); // 0~6까지 발생
-	random_block_shpape += 2;
-	//printf("%d", random_block_shpape); // qqq
-
-	//init_block(block, random_block_shpape, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
-	// aaa 위 코드를 수행하려면 include "board.h"를 해야 하는데 이때 순환 참조 때문에 에러가 발생한다.
-	// 바쁘니까 일단 아래처럼 해놓고 나중에 수정하자.
-	init_block(block, random_block_shpape, 5, 0);
-	//void init_block(block_t * block, block_shapes_t shape) {
-	//init_block(&block); // 블럭을 초기화 하고
-	//set_block_shape(&block, random_no);
-}
+//void create_random_block(block_t* block) { // 7 개중에서 1개의 랜덤 블럭을 만든다. (근:굳이 init함수까지 호출해야하나?)
+//	int random_block_shpape= 0;
+//	srand((unsigned int)time(NULL));
+//
+//	random_block_shpape = (rand() % TETRIS_BLOCK_COUNT); // 0~6까지 발생
+//	random_block_shpape += 2;
+//	//printf("%d", random_block_shpape); // qqq
+//
+//	//init_block(block, random_block_shpape, BLOCK_START_POS_X_ON_BOARD, BLOCK_START_POS_Y_ON_BOARD);
+//	// aaa 위 코드를 수행하려면 include "board.h"를 해야 하는데 이때 순환 참조 때문에 에러가 발생한다.
+//	// 바쁘니까 일단 아래처럼 해놓고 나중에 수정하자.
+//	init_block(block, random_block_shpape, 5, 0);
+//	//void init_block(block_t * block, block_shapes_t shape) {
+//	//init_block(&block); // 블럭을 초기화 하고
+//	//set_block_shape(&block, random_no);
+//}

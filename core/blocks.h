@@ -68,8 +68,8 @@ typedef struct _block_t {
 //	uint32_t lock_delay;	// 충돌후 고정까지 남은 시간 (ms단위)
 //} block_t;
 
-
-void init_block(block_t* block, block_shapes_t shape, int x, int y);
+//void init_block(block_t* block, block_shapes_t shape, int x, int y);
+void init_block(block_t* block, int x, int y); //replace init_block
 void print_block_info(const block_t* block, bool option); // 블럭 정보를 화면에 출력한다. optin을 true로하면 블럭의 그래픽 정보도 같이 보여준다.
 char* get_block_shape_string(const block_t* block);
 // 블럭 shape 정보를 0,1,2,3,..과 같이 갖고 오면, 개발자건 사용자건 1이 뭔지 헷갈리기 때문에 "I","J","L".. 과 같이 돌려준다.
@@ -83,7 +83,8 @@ void rotate_block(block_t* block); // 주의! 회전만 시키고 그리지는 않는다.
 void set_block_position(block_t* block, uint32_t x, uint32_t y); // 역시, x,y값만 바뀌고 그리지는 않는다.
 void fix_block(block_t* block); // 블럭을 현재 위치에서 고정시킨다.
 void unfix_block(block_t* block); // 블럭 고정을 해제한다.
-void create_random_block(block_t* block); // 7 개중에서 1개의 랜덤 블럭을 만든다.
+
+//void create_random_block(block_t* block); // 7 개중에서 1개의 랜덤 블럭을 만든다. <<init_block과 통합.
 // shape만 랜덤으로 뽑고, 나머지는 init_block로 초기화 시키면 된다.
 
 
