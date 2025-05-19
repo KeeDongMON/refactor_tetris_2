@@ -341,6 +341,54 @@ void update_board_with_line_clear(windows_console_t* console, cell_t board[BOARD
     update_board(console, board); 
 }
 
+void draw_nextBox(windows_console_t* console) {
+
+    display_text(console, "\u250c", 34, 3); // 현재 스테이지
+    display_text(console, "\u2500", 35, 3); // 현재 스테이지
+    display_text(console, "NEXT", 36, 3); // 표시기
+    display_text(console, "\u2500", 38, 3); // 현재 스테이지
+    display_text(console, "\u2510", 39, 3); // 현재 스테이지
+
+    display_text(console, "\u2502", 34, 4); // 현재 스테이지
+    display_text(console, "\u2502", 34, 5); // 현재 스테이지
+    display_text(console, "\u2502", 34, 6); // 현재 스테이지
+    display_text(console, "\u2502", 34, 7); // 현재 스테이지
+    
+    display_text(console, "\u2502", 39, 4); // 현재 스테이지
+    display_text(console, "\u2502", 39, 5); // 현재 스테이지
+    display_text(console, "\u2502", 39, 6); // 현재 스테이지
+    display_text(console, "\u2502", 39, 7); // 현재 스테이지
+
+    for (int i = 35; i < 39; i++)  {
+        display_text(console, "\u2500", i, 8); // 현재 스테이지
+    }
+ //   for (int nextJ = 3; nextJ <= 5; nextJ++) {
+	//    for (int nextI = 34; nextI <= 40; nextI++) {
+ //           display_text(console, "NEXT", nextI, nextJ); // 현재 스테이지
+	//	}
+	//}
+    //printf("\u250c");
+    //for (int i = 0; i < ROW; i++) {
+    //    printf("\u2500");
+    //}
+    //printf("\u2510");
+    //printf("\r\n");
+    // 
+    //printf("\u2502");
+    //printf("\u2502");
+    //printf("\r\n");
+    //printf("\u2514");
+    //for (int i = 0; i < ROW; i++)  {
+    //    printf("\u2500");
+    //}
+    //printf("\u2518");
+    //printf("\r\n");
+    //printf("\r\n");
+    //printf("\r\n");
+    //printf("\r\n");
+
+}
+
 void draw_next(windows_console_t* console, block_t* block) {
     //cell_t board[4][4];
 
@@ -350,6 +398,7 @@ void draw_next(windows_console_t* console, block_t* block) {
     //    cell_att_t att; // cell의 속성
     //    bool fixed;
     //} cell_t;
+
     cell_t my_cell;
     init_cell(&my_cell, 0, 0, block->shape, block->color); // 좌표계 점검용 테스트 코드
     
@@ -387,7 +436,7 @@ static void draw_board_from_data(windows_console_t* console, cell_t board[BOARD_
         for (int j = 0; j < BOARD_WIDTH; j++) {
             switch (board[i][j].att) {
             case E: // 0
-                console_set_fore_color(console, WHITE);
+                console_set_fore_color(console, BLACK);
                 draw_cell(&board[i][j], board[i][j].point.x, board[i][j].point.y);
                 console_set_default_color(console);
                 break;
@@ -560,7 +609,7 @@ void move_block_by_key_input(windows_console_t* console, cell_t board[BOARD_HEIG
     }
 
     if (!is_block_collision) { // 복사한 블럭(=copied_block)을 board에 넣을때 충돌이 없다면 
-        printf("m안충돌");
+        //printf("m안충돌");
         //printf("collision %d: ", is_collision);
         //remove_current_block_from_board(board, origin_block); // old_block을 보드에서 지우고
         insert_block_to_board(board, &copied_block, copied_block.x, copied_block.y); // 보드에 삽입

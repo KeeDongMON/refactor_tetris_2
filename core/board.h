@@ -43,6 +43,8 @@ void print_board_att_info(cell_t board[BOARD_HEIGHT][BOARD_WIDTH]);
 //void clear_board_data(cell_t board[BOARD_HEIGHT][BOARD_WIDTH]);
 
 void insert_block_to_board(cell_t board[BOARD_HEIGHT][BOARD_WIDTH], block_t* block, int x, int y); // 보드의 x,y위치에 블럭을 삽입하는 함수
+//void insert_block_to_board(cell_t board[BOARD_HEIGHT][BOARD_WIDTH], block_t* block); // 보드의 x,y위치에 블럭을 삽입하는 함수
+
 bool check_wall_collision_on_board(const cell_t board[BOARD_HEIGHT][BOARD_WIDTH], const block_t* block); // 벽과의 충돌검사
 bool check_block_collision_on_board(const cell_t board[BOARD_HEIGHT][BOARD_WIDTH], const block_t* block); // 보드에서 블럭 충돌을 감지하는 함수
 void remove_current_block_from_board(cell_t board[BOARD_HEIGHT][BOARD_WIDTH], const block_t* block);// 보드의 블럭 제거 (기존블럭이 아닌 현재 블럭만 제거한다.)
