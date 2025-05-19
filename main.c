@@ -79,7 +79,7 @@ int main(void) {
     //print_block_info(&test_block, true);
     //insert_block_to_board(gboard, &random_block, BLOCK_TEST_POS_X, BLOCK_TEST_POS_Y); // aaa insert 함수안에 update가 있다. 제거하자. bbb 제거했다.
 
-    block_t first_block, second_block;
+    block_t first_block;
     //create_random_block(&first_block); 굳이 shape만 랜덤으로 결정하는 함수 사용할 필요없는것 같음.
     //create_random_block(&second_block);
 
@@ -90,7 +90,8 @@ int main(void) {
     key_init();
     uint16_t key_code = 0;
 
-    //delay_ms(10);
+    delay_ms(1000);
+    block_t second_block;
     init_block(&second_block, 15, BLOCK_START_POS_Y_ON_BOARD);
     draw_next(&console, &second_block);
 
